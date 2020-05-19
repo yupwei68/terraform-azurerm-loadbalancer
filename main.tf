@@ -58,7 +58,7 @@ resource "azurerm_lb_probe" "azlb" {
 }
 
 resource "azurerm_lb_rule" "azlb" {
-  count                          = length(var.lb_port)
+  count                          = length(azurerm_lb_probe.azlb)
   name                           = element(keys(var.lb_port), count.index)
   resource_group_name            = azurerm_resource_group.azlb.name
   loadbalancer_id                = azurerm_lb.azlb.id
